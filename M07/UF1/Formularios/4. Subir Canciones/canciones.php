@@ -65,7 +65,7 @@
 	<section class="container">
 		<div class="d-flex">
 			<div class="col-9">
-				<img src="<?php echo "./canciones/".$genero."/".$renombrarImagen; ?>" class="img-fluid" alt="">
+				<img src="<?php echo './canciones/'.$genero.'/'.$renombrarImagen; ?>" class="img-fluid" alt="">
 			</div>
 			<div class="col-3">
 				<ul class="list-group">
@@ -76,13 +76,13 @@
 					<li class="list-group-item"><?php echo $genero; ?></li>
 					<li class="list-group-item"><?php echo $pais; ?></li>
 					<li class="list-group-item"><?php echo $letra; ?></li>
-					<li class="list-group-item">
-						<?php 
-							
-						echo $titulo; 
+					<?php 
+							if(!(!isset($_POST['isVisible']) || !$_POST['isVisible'])){
 						?>
-							
+					<li class="list-group-item">
+						<a href="./canciones/<?php echo $genero.'/'.$renombrarImagen;?>">Imagen</a>
 					</li>
+					<?php } ?>
 					<li class="list-group-item"><?php echo $titulo; ?></li>
 				</ul>
 			</div>
