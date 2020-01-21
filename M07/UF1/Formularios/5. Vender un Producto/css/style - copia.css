@@ -1,0 +1,10 @@
+/*
+.nombrePrecio{
+	text-transform: uppercase;
+    font-weight: bold;
+}
+*/
+li:nth-child(2n){
+	text-transform: uppercase;
+    font-weight: bold;
+}
