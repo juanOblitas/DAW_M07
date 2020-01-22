@@ -83,7 +83,13 @@
 						<a href="./canciones/<?php echo $genero.'/'.$renombrarImagen;?>">Imagen</a>
 					</li>
 					<?php } ?>
-					<li class="list-group-item"><?php echo $titulo; ?></li>
+					<?php 
+							if(!(!isset($_POST['isVisible']) || !$_POST['isVisible'])){
+						?>
+					<li class="list-group-item">
+						<a href="./canciones/<?php echo $pais.'/'.$renombrarAudio;?>">Url música</a>
+					</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
