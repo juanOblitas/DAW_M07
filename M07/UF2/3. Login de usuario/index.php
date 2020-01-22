@@ -20,12 +20,17 @@ session_start();
 		}else{
 			$mensaje = "Usuario no identificado";
 		}
+
+
 	?>
+
 	<section class="container">
 
 		<p><?php echo $mensaje; ?></p>
+		<form action="login.php" method="post">
+			<button type="submit" class="btn btn-secondary" name="logout">Logout</button>
+		</form>
 		
-		<button type="button" class="btn btn-secondary">Logout</button>
 	</section>
 </body>
 </html>

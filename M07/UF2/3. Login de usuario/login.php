@@ -13,6 +13,11 @@ $_SESSION['usuario']=False;
 </head>
 <body>
 	<?php
+			if(isset($_POST['logout'])){
+				session_destroy();
+			}
+		?>
+	<?php
 	$nombreUsuario = 'admin';
 	$password = 'phpisgood'; 
 
