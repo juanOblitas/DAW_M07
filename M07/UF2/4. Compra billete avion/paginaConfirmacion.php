@@ -46,9 +46,32 @@ session_start();
 	<?php
 		/* Escribimos en el fichero */
 		$fp = fopen("miarchivo.csv", "w");
-		$texto = "Datos del usuario<br>Especificación del vuelo<br>".$_SESSION['paisOrigen'];
+		/*$texto = "Datos del usuario<br>Especificación del vuelo<br>".$_SESSION['paisOrigen'];
 		fwrite($fp, $texto);
-		fclose($fp);
+		fclose($fp);*/
+		/*
+		function write_csv($matriz, $ruta_csv) {
+			if( !file_exists( $ruta_csv ) ); 
+				file_put_contents( $ruta_csv, '');
+			$outputBuffer = fopen($ruta_csv, 'w');
+			foreach($matriz as $n_linea => $linea) {
+				fputcsv($outputBuffer, $linea, ';', '"');
+			}
+			fclose($outputBuffer);
+		}
+		$matriz = array('titulo' => 'Datos Generales del billete', 
+						'Especificación' => 'Especificación del vuelo',
+						'Origen' => 'Origen: '.$_SESSION['paisOrigen']);		
+		write_csv($matriz,"miarchivo.csv");*/
+		$matriz = array('titulo' => 'Datos Generales del billete', 
+						'Especificación' => 'Especificación del vuelo',
+						'Origen' => 'Origen: '.$_SESSION['paisOrigen']);
+		$ruta_csv ="miarchivo2.csv";
+		$outputBuffer = fopen($ruta_csv, 'w');
+		foreach($matriz as $n_linea => $linea) {
+			fputcsv($outputBuffer, $linea);		
+		}
+		fclose($outputBuffer);
 	?>
 	
 </body>

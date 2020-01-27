@@ -20,8 +20,7 @@ session_start();
 		}else{
 			$mensaje = "Usuario no identificado";
 		}
-
-
+		
 	?>
 
 	<section class="container">

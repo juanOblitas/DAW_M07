@@ -14,7 +14,8 @@ class DataUser {
     	$conexion = new Conexion();
         $consulta = $conexion->prepare('INSERT INTO ' . self::TABLA . ' VALUES(null, :login,:password,:rol)');
         $consulta->bindParam(':login', $login);	
-        $consulta->bindParam(':password', $password);
+        $$password= password_hash($password, PASSWORD_DEFAULT);
+        $consulta->bindParam(':password', $$password);
         $consulta->bindParam(':rol', $rol);
         $resultado = $consulta->execute();
         $conexion = null;//cierra la conexion
@@ -29,7 +30,7 @@ class DataUser {
         $consulta = $conexion->prepare('UPDATE ' . self::TABLA . ' SET login = :login, password=:password, rol=:rol WHERE id=:id');
         $consulta->bindParam(':id', $id);
         $consulta->bindParam(':login', $rol);
-        $consulta->bindParam(':password', $password);
+        $consulta->bindParam(':password', password_hash($password, PASSWORD_DEFAULT));
         $consulta->bindParam(':rol', $rol);
         $resultado= $consulta->execute();
 		$conexion = null;
@@ -50,26 +51,36 @@ class DataUser {
     public function isUser($login,$password){
 
         $conexion = new Conexion();
-        $consulta=$conexion->prepare('SELECT COUNT(*) FROM '. self::TABLA . ' WHERE login=:login AND password=:password');
+        $consulta=$conexion->prepare('SELECT COUNT(*) FROM '. self::TABLA . ' WHERE login=:login');
         $consulta->bindParam(':login', $login);
-        $consulta->bindParam(':password', $password);
+        $hash = $this-> getHash($login);
+        $password = password_verify($password,$hash);
         $consulta->execute();
         $registro = $consulta->fetch();
         $conexion=null;
         foreach ($registro as $value) {
-            if($value[0]==1)
+            if($value[0]==1 && $password)
                 return 1;
         }
         return 0;
     }
 
+    public function getHash($login){
+        $conexion = new Conexion();
+        $consulta=$conexion->prepare('SELECT password FROM '. self::TABLA . ' WHERE login=:login');
+        $consulta->bindParam(':login', $login);
+        $consulta->execute();
+        $resultado = $consulta->fetch();
+        return $resultado[0];
+    }
 
-    public function showRol($login,$password){
+
+    public function showRol($login){
 
         $conexion = new Conexion();
-        $consulta=$conexion->prepare('SELECT rol FROM '. self::TABLA . ' WHERE login=:login AND password=:password');
+        $consulta=$conexion->prepare('SELECT rol FROM '. self::TABLA . ' WHERE login=:login');
         $consulta->bindParam(':login', $login);
-        $consulta->bindParam(':password', $password);
+        //$consulta->bindParam(':password', $password);
         $consulta->execute();
         $registro = $consulta->fetch();
         $conexion=null;

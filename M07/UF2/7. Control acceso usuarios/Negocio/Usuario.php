@@ -68,16 +68,22 @@
 		    return $resultado;
 		}
 
-		public function isUser($login,$password){
+		public function isUser(){
 
 	        $objDataUser = new DataUser();
-	        $registro = $objDataUser->isUser($login,$password);
+	        $registro = $objDataUser->isUser($this->login,$this->password);
 	        return $registro;
     	}
 
     	public function showRol(){
 	        $objDataUser = new DataUser();
-	        $registro = $objDataUser->showRol($this->login,$this->password);
+	        $registro = $objDataUser->showRol($this->login);
+	        return $registro;
+ 		}
+
+ 		public function getHash(){
+	        $objDataUser = new DataUser();
+	        $registro = $objDataUser->getHash($this->login);
 	        return $registro;
  		}
 

@@ -17,11 +17,6 @@ $_SESSION['usuario']=False;
 				session_destroy();
 			}
 		?>
-	<?php
-	$nombreUsuario = 'admin';
-	$password = 'phpisgood'; 
-
-	?>
 	<section class="container">
 		<form action="index.php" method="post">
 			<div class="form-group">
